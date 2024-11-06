@@ -27,7 +27,9 @@ export default function Menu() {
             <header>
                 <Navbar bg="dark" data-bs-theme="dark">
                     <Container>
-                    <Navbar.Brand href="#home">KodigoStore</Navbar.Brand>
+                    <Navbar.Brand href="/home">
+                        <img src="/store-svg.svg" alt="Logo" width={30} className="d-inline-block align-top" />
+                    {' '} KodigoStore</Navbar.Brand>
                     <Nav className="me-auto">
                         <Nav.Link href="/home">Home</Nav.Link>
                         <Nav.Link href="/productos">Productos</Nav.Link>

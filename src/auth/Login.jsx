@@ -38,7 +38,9 @@ export default function Login() {
               <div className="card shadow-2-strong" style={{ borderRadius: "1rem"}}>
                 <div className="card-body p-5 text-center">
 
-                  <h3 className="mb-5">Inicio de sesión</h3>
+                  <h3 className="mb-3">Inicio de sesión</h3>
+
+                  <img src="/store-svg.svg" alt="icono" width={200} className='mb-4'/>
 
                   <form onSubmit={handleSubmit(loginForm)}>
                     <div className="form-outline mb-4">
