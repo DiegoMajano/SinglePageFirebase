@@ -7,6 +7,9 @@ import EditForm from '../components/EditForm'
 import Register from '../auth/Register'
 import Login from '../auth/Login'
 import ProtectedRoute from './ProtectedRoute'
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 
 
 
@@ -22,19 +25,16 @@ export default function Menu() {
     <BrowserRouter>
         { 
             <header>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to='/'>Home</Link>
-                        </li>
-                        <li>
-                            <Link to='/productos'>Productos</Link>
-                        </li>
-                        <li>
-                            <Link to='/registro'>Registro</Link>
-                        </li>
-                    </ul>
-                </nav>            
+                <Navbar bg="dark" data-bs-theme="dark">
+                    <Container>
+                    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+                    <Nav className="me-auto">
+                        <Nav.Link href="/home">Home</Nav.Link>
+                        <Nav.Link href="/productos">Productos</Nav.Link>
+                        <Nav.Link href="/registro">Registro</Nav.Link>
+                    </Nav>
+                    </Container>
+                </Navbar>                   
             </header> 
         }
         

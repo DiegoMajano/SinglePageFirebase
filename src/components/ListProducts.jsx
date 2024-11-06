@@ -3,7 +3,8 @@ import { collection, deleteDoc, onSnapshot, doc  } from 'firebase/firestore'
 import db from '../firebase/appConfig'
 import { Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
-
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 export default function ListProducts() {
 
@@ -66,28 +67,33 @@ export default function ListProducts() {
     }
   }
 
-
-
   return (
-    <div>
-      <h1>Lista de productos</h1>
-      <div>
-        {
-          products.length > 0 ?
-          products.map((product) => {
-            return (
-              <div key={product.id}>
-                <div>
-                  <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                  <Link to={`/editar/${product.id}`}>Editar</Link>
-                  <button onClick={() => deleteProduct(product.id)}>Eliminar</button>
+    <div className="container py-4">
+      <h1 className="text-center mb-4">Lista de productos</h1>
+      <div className="row">
+        {products.length > 0 ? (
+          products.map((product) => (
+            <div key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 d-flex align-items-stretch">
+              <div className="card" style={{ width: "100%", minWidth: "10rem", borderRadius: "0.5rem" }}>
+                {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+                <div className="card-body d-flex flex-column">
+                  <h5 className="card-title">{product.name}</h5>
+                  <p className="card-text">{product.description}</p>
+                  <div className="mt-auto">
+                    <Link to={`/editar/${product.id}`} className="btn btn-link">Editar</Link>
+                    <Button variant="danger" onClick={() => deleteProduct(product.id)}>
+                      Eliminar
+                    </Button>
+                  </div>
                 </div>
               </div>
-            )
-          }) : <p>No hay productos</p>
-        } 
+            </div>
+          ))
+        ) : (
+          <p className="text-center">No hay productos</p>
+        )}
       </div>
     </div>
+
   )
 }
