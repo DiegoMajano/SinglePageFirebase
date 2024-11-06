@@ -3,8 +3,9 @@ import React, { useState, useEffect  } from 'react'
 import { signOut } from 'firebase/auth'
 import Login from '../auth/Login'
 import { auth_user } from '../firebase/appConfig'
-import Menu from '../routes/Menu'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
+
 
 
 export default function Home() {
@@ -31,16 +32,42 @@ export default function Home() {
    // metodo para cerrar la sesion
 
    const logout = () => {
-    signOut(auth_user)
-      .then(() => {
-        alert("La sesión se ha cerrado");
-        sessionStorage.clear();
-        setUser(null);
-        navigate('/login');   
-      })
-      .catch((error) => {
-        console.error("Error al cerrar sesión", error);
-      });
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger"
+      },
+      buttonsStyling: false
+    });
+    swalWithBootstrapButtons.fire({
+      title: "Cerrar sesión",
+      text: "¿Estás seguro de cerrar sesión?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Si deseo cerrar sesión",
+      cancelButtonText: "No, cancel!",
+      reverseButtons: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        signOut(auth_user)
+        .then(() => {
+          sessionStorage.clear();
+          setUser(null);
+          navigate('/login');     
+        })
+        .catch((error) => {
+          console.error("Error al cerrar sesión", error);
+        });
+
+        swalWithBootstrapButtons.fire({
+          title: "Sesión cerrada",
+          text: "Has cerrado tu sesión exitosamente",
+          icon: "success"
+        });
+      } 
+    });    
   };
 
 
